@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    container_name: footprint-app
+    ports:
+      - "4000:4000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/footprint
+      - JWT_SECRET=supersecretkey
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    container_name: footprint-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
+

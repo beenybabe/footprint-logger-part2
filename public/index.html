@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Footprint Logger</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    input, button { margin: 5px 0; padding: 8px; width: 100%; }
+    #dashboard { display: none; margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f4f4f4; }
+  </style>
+</head>
+<body>
+
+<h1>🌍 Footprint Logger</h1>
+
+<div id="auth">
+  <h2>Register</h2>
+  <input id="reg-username" placeholder="Username">
+  <input id="reg-email" placeholder="Email">
+  <input id="reg-password" placeholder="Password" type="password">
+  <button id="register">Register</button>
+
+  <h2>Login</h2>
+  <input id="login-email" placeholder="Email">
+  <input id="login-password" placeholder="Password" type="password">
+  <button id="login">Login</button>
+</div>
+
+<div id="dashboard">
+  <button id="logout">Logout</button>
+  <h2>Add Activity</h2>
+  <input id="description" placeholder="Activity description">
+  <input id="category" placeholder="Category (transport/food/energy)">
+  <input id="co2" placeholder="CO₂ emission (kg)">
+  <button id="add-activity">Add Activity</button>
+
+  <h2>Your Activities</h2>
+  <table id="activities">
+    <tr><th>Description</th><th>Category</th><th>CO₂</th><th>Date</th></tr>
+  </table>
+  <p>Total CO₂: <span id="total-co2">0</span> kg</p>
+
+  <h2>Community</h2>
+  <p>Average emissions: <span id="community-average">0</span> kg</p>
+  <h3>Leaderboard (Top 10 eco-friendly users)</h3>
+  <table id="leaderboard">
+    <tr><th>User</th><th>Total CO₂</th></tr>
+  </table>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
