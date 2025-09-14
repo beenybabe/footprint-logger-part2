@@ -59,20 +59,23 @@ To reset DB:
 
 `cd footprint-logger`
 
-## 2. Set environment variables
+## 2. Install dependencies
+run:
+`npm install`
+
+## 3. Set environment variables
 
 Create a .env file in the root:
 
 ``` 
 MONGO_URI=mongodb://mongo:27017/footprint
 JWT_SECRET=supersecretkey
-PORT=4000
 ```
 
 
 Note: When running with Docker, these values are already set in docker-compose.yml.
 
-## 3. Run with Docker (recommended)
+## 4. Run with Docker (recommended)
 
 Make sure [Docker][1] and Docker Compose are installed.
 
