@@ -1,7 +1,7 @@
 // routes/activity.js
 const express = require("express");
-const Activity = require("../../models/Activity");
-const auth = require("../../middleware/auth");
+const Activity = require("../models/Activity");
+const auth = require("../middleware/auth");
 
 const router = express.Router();
 
