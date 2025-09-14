@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Footprint Logger</title>
-  <style>
-    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
-    input, button { margin: 5px 0; padding: 8px; width: 100%; }
-    #dashboard { display: none; margin-top: 20px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-    th { background: #f4f4f4; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Footprint Logger</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>🌍 Footprint Logger</h1>
 
-<h1>🌍 Footprint Logger</h1>
+    <div id="auth">
+      <h2>Register</h2>
+      <input id="reg-username" placeholder="Username" />
+      <input id="reg-email" placeholder="Email" />
+      <input id="reg-password" placeholder="Password" type="password" />
+      <button id="register">Register</button>
+      <h2 id="options-divider">OR</h2>
+      <h2>Login</h2>
+      <input id="login-email" placeholder="Email" />
+      <input id="login-password" placeholder="Password" type="password" />
+      <button id="login">Login</button>
+    </div>
 
-<div id="auth">
-  <h2>Register</h2>
-  <input id="reg-username" placeholder="Username">
-  <input id="reg-email" placeholder="Email">
-  <input id="reg-password" placeholder="Password" type="password">
-  <button id="register">Register</button>
+    <div id="dashboard">
+      <h2></h2>
+      <button id="logout">Logout</button>
+      <button class="btn" onclick="addRow()">Add Activity</button>
+      <table id="activityTable">
+        <thead>
+          <tr>
+            <th>Activity</th>
+            <th>CO2 Emission (kg)</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+      <button class="btn" onclick="calculateTotal()">
+        Calculate Total CO2
+      </button>
+      <h3 id="totalCO2"></h3>
 
-  <h2>Login</h2>
-  <input id="login-email" placeholder="Email">
-  <input id="login-password" placeholder="Password" type="password">
-  <button id="login">Login</button>
-</div>
+      <h2>Community</h2>
+      <section id="leaderboard-section">
+        <h2>🌍 Leaderboard (Lowest Footprint)</h2>
+        <ol id="leaderboard"></ol>
+      </section>
+    </div>
 
-<div id="dashboard">
-  <button id="logout">Logout</button>
-  <h2>Add Activity</h2>
-  <input id="description" placeholder="Activity description">
-  <input id="category" placeholder="Category (transport/food/energy)">
-  <input id="co2" placeholder="CO₂ emission (kg)">
-  <button id="add-activity">Add Activity</button>
-
-  <h2>Your Activities</h2>
-  <table id="activities">
-    <tr><th>Description</th><th>Category</th><th>CO₂</th><th>Date</th></tr>
-  </table>
-  <p>Total CO₂: <span id="total-co2">0</span> kg</p>
-
-  <h2>Community</h2>
-  <p>Average emissions: <span id="community-average">0</span> kg</p>
-  <h3>Leaderboard (Top 10 eco-friendly users)</h3>
-  <table id="leaderboard">
-    <tr><th>User</th><th>Total CO₂</th></tr>
-  </table>
-</div>
-
-<script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

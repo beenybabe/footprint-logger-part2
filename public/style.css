@@ -1,0 +1,45 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-image: url("images/small-plant.png");
+  background-color: #cccccc;
+  height: 100%;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover;
+
+}
+input,
+button {
+  margin: 5px 0;
+  padding: 8px;
+  width: 50%;
+}
+button{
+    background-color: #8cdb90;
+}
+#dashboard {
+  display: none;
+  margin-top: 20px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background: #f4f4f4;
+}
+
+#options-divider {
+    text-align: center;
+    padding-right: 50%;
+}

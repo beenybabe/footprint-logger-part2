@@ -53,6 +53,14 @@ document.getElementById("logout").onclick = () => {
 };
 
 // ====== Activities ======
+const activityOptions = {
+  "Driving (10km)": 2.3,
+  "Bus Ride (10km)": 0.7,
+  "Flight (1hr)": 90,
+  "Meat-based Meal": 5.5,
+  "Vegetarian Meal": 2.0,
+  "Laundry (1 Load)": 1.2,
+};
 async function loadActivities() {
   const res = await fetch(`${API}/activities`, {
     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
@@ -101,7 +109,49 @@ document.getElementById("add-activity").onclick = async () => {
     alert(data.error);
   }
 };
+function addRow() {
+  const tableBody = document.getElementById("tableBody");
+  const newRow = document.createElement("tr");
 
+  const activityCell = document.createElement("td");
+  const select = document.createElement("select");
+
+  Object.keys(activityOptions).forEach((activity) => {
+    const option = document.createElement("option");
+    option.value = activity;
+    option.textContent = activity;
+    select.appendChild(option);
+  });
+
+  activityCell.appendChild(select);
+  newRow.appendChild(activityCell);
+
+  const emissionCell = document.createElement("td");
+  emissionCell.textContent = activityOptions[select.value];
+  newRow.appendChild(emissionCell);
+
+  select.addEventListener("change", function () {
+    emissionCell.textContent = activityOptions[select.value];
+    saveData();
+  });
+
+  tableBody.appendChild(newRow);
+  saveData();
+}
+
+function calculateTotal() {
+  const tableBody = document.getElementById("tableBody");
+  let total = 0;
+
+  for (let row of tableBody.rows) {
+    const emission = parseFloat(row.cells[1].textContent);
+    total += emission;
+  }
+
+  document.getElementById(
+    "totalCO2"
+  ).textContent = `Total CO2 Emission: ${total.toFixed(2)} kg`;
+}
 // ====== Community ======
 async function loadCommunity() {
   // Average
@@ -124,4 +174,38 @@ async function loadCommunity() {
     row.insertCell(0).innerText = u.username;
     row.insertCell(1).innerText = u.totalEmissions;
   });
+}
+async function loadLeaderboard() {
+  try {
+    const res = await fetch("/activities/leaderboard");
+    const data = await res.json();
+
+    const leaderboardList = document.getElementById("leaderboard");
+    leaderboardList.innerHTML = "";
+
+    data.forEach((entry) => {
+      const li = document.createElement("li");
+      li.textContent = `${entry.username}: ${entry.totalEmissions} kg CO₂`;
+      leaderboardList.appendChild(li);
+    });
+  } catch (err) {
+    console.error("Failed to load leaderboard:", err);
+  }
+}
+
+// Load leaderboard when page starts
+window.addEventListener("DOMContentLoaded", () => {
+  loadLeaderboard();
+});
+
+// Save the data
+function saveData() {
+  const rows = [];
+  const tableBody = document.getElementById("tableBody");
+
+  for (let row of tableBody.rows) {
+    rows.push(row.cells[0].firstChild.value);
+  }
+
+  localStorage.setItem("co2Activities", JSON.stringify(rows));
 }
